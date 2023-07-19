@@ -1,6 +1,8 @@
 package com.dev.inventario;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,13 +19,13 @@ public class App {
 	Logger logger = LoggerFactory.getLogger(App.class.getName());
 	@GetMapping("/")
 	public HashMap<String, String>index() {
-		String fechaInicio = DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm:ss a")
-                .format(LocalDateTime.now());
+		String fechaInicio = ZonedDateTime.now(ZoneId.of("America/Santiago"))
+                .format(DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm:ss a"));
 		logger.info("Inicio " + App.class.getSimpleName()+"."+"index - " + fechaInicio);
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("responde", "200");
-		String fechaFin = DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm:ss a")
-                .format(LocalDateTime.now());
+		String fechaFin = ZonedDateTime.now(ZoneId.of("America/Santiago"))
+                .format(DateTimeFormatter.ofPattern("MMMM dd yyyy, hh:mm:ss a"));
 		logger.info("Fin " + App.class.getSimpleName()+"."+"index - "+ fechaFin);
 		return map;
 	}
